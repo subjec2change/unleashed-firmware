@@ -1,5 +1,5 @@
 entry,status,name,type,params
-Version,+,87.7,,
+Version,+,88.0,,
 Header,+,applications/drivers/subghz/cc1101_ext/cc1101_ext_interconnect.h,,
 Header,+,applications/services/applications.h,,
 Header,+,applications/services/bt/bt_service/bt.h,,
@@ -468,16 +468,6 @@ Function,-,__isnand,int,double
 Function,-,__isnanf,int,float
 Function,-,__itoa,char*,"int, char*, int"
 Function,-,__locale_mb_cur_max,int,
-Function,+,__retarget_lock_acquire,void,_LOCK_T
-Function,+,__retarget_lock_acquire_recursive,void,_LOCK_T
-Function,-,__retarget_lock_close,void,_LOCK_T
-Function,+,__retarget_lock_close_recursive,void,_LOCK_T
-Function,-,__retarget_lock_init,void,_LOCK_T*
-Function,+,__retarget_lock_init_recursive,void,_LOCK_T*
-Function,+,__retarget_lock_release,void,_LOCK_T
-Function,+,__retarget_lock_release_recursive,void,_LOCK_T
-Function,-,__retarget_lock_try_acquire,int,_LOCK_T
-Function,-,__retarget_lock_try_acquire_recursive,int,_LOCK_T
 Function,-,__signbitd,int,double
 Function,-,__signbitf,int,float
 Function,-,__signgam,int*,

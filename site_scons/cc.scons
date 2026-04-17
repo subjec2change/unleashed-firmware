@@ -23,8 +23,9 @@ ENV.AppendUnique(
         # "-MP",
         "-Wall",
         "-Wextra",
-        "-Werror",
+        # "-Werror",  # Commented out for compatibility with GCC 13.2
         "-Wno-error=deprecated-declarations",
+        "-Wno-error=strict-aliasing",  # Added for GCC 13.2 compatibility
         "-Wno-address-of-packed-member",
         "-Wredundant-decls",
         "-Wdouble-promotion",

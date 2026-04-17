@@ -570,7 +570,12 @@ int json_vprintf(struct json_out* out, const char* fmt, va_list xap) {
 
             if(fmt[1] == 'l' && fmt[2] == 'l' && (fmt[3] == 'd' || fmt[3] == 'u')) {
                 int64_t val = va_arg(ap, int64_t);
-                const char* fmt2 = fmt[3] == 'u' ? "%" UINT64_FMT : "%" INT64_FMT;
+                char fmt2[16];
+                if(fmt[3] == 'u') {
+                    snprintf(fmt2, sizeof(fmt2), "%%llu");
+                } else {
+                    snprintf(fmt2, sizeof(fmt2), "%%lld");
+                }
                 snprintf(buf, sizeof(buf), fmt2, val);
                 len += out->printer(out, buf, strlen(buf));
                 skip += 2;
@@ -686,8 +691,8 @@ int json_vprintf(struct json_out* out, const char* fmt, va_list xap) {
          * inherit the advancement made by vprintf.
          * 32-bit (linux or windows) passes va_list by value.
          */
-                if((n + 1 == strlen("%" PRId64) && strcmp(fmt2, "%" PRId64) == 0) ||
-                   (n + 1 == strlen("%" PRIu64) && strcmp(fmt2, "%" PRIu64) == 0)) {
+                if((n + 1 == 5 && strcmp(fmt2, "%lld") == 0) ||
+                   (n + 1 == 5 && strcmp(fmt2, "%llu") == 0)) {
                     (void)va_arg(ap, int64_t);
                 } else if(strcmp(fmt2, "%.*s") == 0) {
                     (void)va_arg(ap, int);
