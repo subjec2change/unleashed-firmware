@@ -56,6 +56,7 @@ env.Append(
         File("protocols/mf_classic/mf_classic_listener.h"),
         File("protocols/slix/slix_listener.h"),
         File("protocols/type_4_tag/type_4_tag_listener.h"),
+        File("protocols/emv/emv_listener.h"),
         # Sync API
         File("protocols/iso14443_3a/iso14443_3a_poller_sync.h"),
         File("protocols/felica/felica_poller_sync.h"),
