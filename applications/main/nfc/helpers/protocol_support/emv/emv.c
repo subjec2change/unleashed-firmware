@@ -90,8 +90,14 @@ static bool nfc_scene_read_menu_on_event_emv(NfcApp* instance, SceneManagerEvent
     return consumed;
 }
 
+static void nfc_scene_emulate_on_enter_emv(NfcApp* instance) {
+    const EmvData* data = nfc_device_get_data(instance->nfc_device, NfcProtocolEmv);
+    instance->listener = nfc_listener_alloc(instance->nfc, NfcProtocolEmv, data);
+    nfc_listener_start(instance->listener, NULL, NULL);
+}
+
 const NfcProtocolSupportBase nfc_protocol_support_emv = {
-    .features = NfcProtocolFeatureNone,
+    .features = NfcProtocolFeatureEmulateFull,
 
     .scene_info =
         {
@@ -126,6 +132,11 @@ const NfcProtocolSupportBase nfc_protocol_support_emv = {
     .scene_save_name =
         {
             .on_enter = nfc_protocol_support_common_on_enter_empty,
+            .on_event = nfc_protocol_support_common_on_event_empty,
+        },
+    .scene_emulate =
+        {
+            .on_enter = nfc_scene_emulate_on_enter_emv,
             .on_event = nfc_protocol_support_common_on_event_empty,
         },
     .scene_write =
